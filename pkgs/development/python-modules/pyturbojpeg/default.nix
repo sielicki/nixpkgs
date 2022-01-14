@@ -16,7 +16,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "PyTurboJPEG";
     inherit version;
-    hash = "sha256-l3eeD/WGiqVQ2E92WBV8eTRPVdtUnP7wP4brE8PPTkw=";
+    sha256 = "97779e0ff5868aa550d84f7658157c79344f55db549cfef03f86eb13c3cf4e4c";
   };
 
   patches = [
