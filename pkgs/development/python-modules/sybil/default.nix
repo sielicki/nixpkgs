@@ -22,7 +22,9 @@ buildPythonApplication rec {
   ];
 
   disabledTests = [
-    "test_modules_not_importable_unittest"
+    # Will be fixed with 3.0.0, https://github.com/simplistix/sybil/pull/27
+    "test_future_imports"
+    "test_pytest"
   ];
 
   pythonImportsCheck = [
