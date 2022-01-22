@@ -9536,6 +9536,8 @@ in {
 
   tbm-utils = callPackage ../development/python-modules/tbm-utils { };
 
+  teamcity-messages = callPackage ../development/python-modules/teamcity-messages { };
+
   telegram = callPackage ../development/python-modules/telegram { };
 
   telethon = callPackage ../development/python-modules/telethon {
