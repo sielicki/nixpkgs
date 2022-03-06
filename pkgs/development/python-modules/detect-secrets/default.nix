@@ -22,7 +22,7 @@ buildPythonPackage rec {
     owner = "Yelp";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-jNyZLRzJ0gxr5O6Y/Bnr6uuUav1yKDgok2shFR9I9Ws=";
+    hash = "sha256-4VcV06iaL3NAj7qF8RyfWV1zgrt928AQfjGeuO2Pbjk=";
     leaveDotGit = true;
   };
 
