@@ -286,6 +286,8 @@ with pkgs;
 
   auth0-cli = callPackage ../tools/admin/auth0-cli { };
 
+  autofdo = callPackage ../development/tools/autofdo { };
+
   atomic-operator = callPackage ../tools/security/atomic-operator { };
 
   avro-tools = callPackage ../development/tools/avro-tools { };
