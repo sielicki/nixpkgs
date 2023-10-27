@@ -18,6 +18,7 @@
 , cmake
 , fishPlugins
 , procps
+, glibcLocales
 
 # used to generate autocompletions from manpages and for configuration editing in the browser
 , usePython ? true
@@ -243,7 +244,11 @@ let
       procps
     ];
 
-    checkPhase = ''
+    checkPhase = (lib.optionalString !stdenv.isDarwin ''
+      # without this, output tests can be garbled (and fail) on certain
+      # platforms. Observed on armv7l-linux.
+      export LOCALE_ARCHIVE="${glibcLocales}/lib/locale/locale-archive"
+    '') + ''
       make test
     '';
 
