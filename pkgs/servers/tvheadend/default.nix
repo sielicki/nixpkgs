@@ -14,10 +14,11 @@
 , bzip2
 , dbus
 , dtv-scan-tables
-, ffmpeg_4
+, ffmpeg_5
 , gettext
 , gnutar
 , gzip
+, libhdhomerun
 , libiconv
 , openssl
 , uriparser
@@ -25,7 +26,7 @@
 }:
 
 let
-  version = "4.2.8";
+  version = "2023.11";
 in stdenv.mkDerivation {
   pname = "tvheadend";
   inherit version;
@@ -33,24 +34,13 @@ in stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "tvheadend";
     repo = "tvheadend";
-    rev = "v${version}";
-    sha256 = "1xq059r2bplaa0nd0wkhw80jfwd962x0h5hgd7fz2yp6largw34m";
+    rev = "bc30a74de8ab5efc3605afd68eb6d01d08170316";
+    sha256 = lib.fakeSha256;
   };
 
   outputs = [
     "out"
     "man"
-  ];
-
-  patches = [
-    # Pull upstream fix for -fno-common toolchain
-    #   https://github.com/tvheadend/tvheadend/pull/1342
-    # TODO: can be removed with 4.3 release.
-    (fetchpatch {
-      name = "fno-common.patch";
-      url = "https://github.com/tvheadend/tvheadend/commit/bd92f1389f1aacdd08e913b0383a0ca9dc223153.patch";
-      sha256 = "17bsx6mnv4pjiayvx1d57dphva0kvlppvnmmaym06dh4524pnly1";
-    })
   ];
 
   nativeBuildInputs = [
@@ -64,9 +54,10 @@ in stdenv.mkDerivation {
     avahi
     bzip2
     dbus
-    ffmpeg_4 # depends on libav
+    ffmpeg_5
     gettext
     gzip
+    libhdhomerun
     libiconv
     openssl
     uriparser
@@ -89,8 +80,6 @@ in stdenv.mkDerivation {
     "--disable-dvbscan"
     "--disable-bintray_cache"
     "--disable-ffmpeg_static"
-    # incompatible with our libhdhomerun version
-    "--disable-hdhomerun_client"
     "--disable-hdhomerun_static"
     "--disable-libx264_static"
     "--disable-libx265_static"
@@ -130,7 +119,7 @@ in stdenv.mkDerivation {
     homepage = "https://tvheadend.org";
     license = licenses.gpl3Only;
     platforms = platforms.unix;
-    maintainers = with maintainers; [ simonvandel ];
+    maintainers = with maintainers; [ simonvandel sielicki ];
     mainProgram = "tvheadend";
   };
 }
